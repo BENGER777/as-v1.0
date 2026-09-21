@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0A0A0A">
+<title>Авто-ОС</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Geist', 'system-ui', 'sans-serif'],
+          plate: ['"Roboto Condensed"', 'Arial Narrow', 'sans-serif']
+        },
+        colors: {
+          bg:  { DEFAULT: '#0A0A0A' },
+          ink: { DEFAULT: '#F5F5F5', 2: 'rgba(245,245,245,0.6)', 3: 'rgba(245,245,245,0.32)' },
+          lime:{ DEFAULT: '#C6FF3D' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= ЭКРАН 1: ЛЕНДИНГ ================= -->
+<div id="screen-landing" class="screen active">
+  <div class="max-w-md mx-auto min-h-screen relative flex flex-col px-6 overflow-hidden">
+    <div class="hero-glow"></div>
+
+    <div class="pt-8 flex items-center gap-2.5 relative z-10">
+      <div class="w-8 h-8 rounded-full flex items-center justify-center logo-circle">
+        <span class="text-[12px] font-bold logo-letter">А</span>
+      </div>
+      <span class="font-medium tracking-tight text-[15px]">Авто-ОС</span>
+    </div>
+
+    <div class="flex-1 flex flex-col justify-center relative z-10 py-12">
+      <div class="mb-4 flex items-center">
+        <span class="live-dot"></span>
+        <span class="text-[10px] uppercase tracking-[0.28em] font-medium text-lime">Твоя машина</span>
+      </div>
+
+      <h1 class="hero-title mb-5">
+        <span class="word"><span>Под</span></span>
+        &nbsp;
+        <span class="word"><span class="text-lime">контролем</span></span>
+      </h1>
+
+      <p class="text-[14px] leading-relaxed max-w-[320px] text-ink-2">
+        Веди историю. Находи сервисы. Общайся с владельцами.
+      </p>
+
+      <div class="mt-10">
+        <div class="card p-4 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-px card-shine-line"></div>
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 rounded-full bg-lime"></div>
+              <span class="text-[10px] uppercase tracking-[0.18em] font-medium text-ink-3">Моя машина</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full font-medium badge-lime">LIVE</span>
+          </div>
+          <div class="flex items-baseline gap-3 mb-1">
+            <div class="font-semibold text-[20px] tracking-tight">Моя машина</div>
+            <div class="text-[11px] text-ink-3">—</div>
+          </div>
+          <div class="text-[11px] mb-4 text-ink-3">Заполни данные при первом запуске</div>
+          <div class="rounded-xl p-3 flex items-start gap-2.5 landing-hint">
+            <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 landing-hint-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-medium">Здесь появятся напоминания</div>
+              <div class="text-[10.5px] mt-0.5 text-ink-2">Когда добавишь машину</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pb-6 relative z-10">
+      <button onclick="goTo('registration')" class="btn-primary">Начать</button>
+    </div>
+
+    <div class="pb-8 text-center relative z-10">
+      <button onclick="goTo('registration')" class="text-[11px] text-ink-3">
+        Уже есть аккаунт? <span class="text-lime">Войти</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 2: РЕГИСТРАЦИЯ ================= -->
+<div id="screen-registration" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative flex flex-col px-6 overflow-hidden">
+    <div class="hero-glow hero-glow-top"></div>
+
+    <div class="pt-8 pb-4 flex items-center gap-3 relative z-10">
+      <button id="backBtnReg" class="btn-back" onclick="registrationBack()" style="display:none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      </button>
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full flex items-center justify-center logo-circle">
+          <span class="text-[12px] font-bold logo-letter">А</span>
+        </div>
+        <span class="font-medium tracking-tight text-[15px]">Авто-ОС</span>
+      </div>
+    </div>
+
+    <div id="reg-phone" class="flex-1 flex flex-col justify-center py-12 relative z-10">
+      <div class="mb-2 text-[10px] uppercase tracking-[0.28em] font-medium text-lime">Регистрация</div>
+      <h1 class="font-semibold mb-3 text-h1">
+        Как тебя<br>найти?
+      </h1>
+      <p class="text-[13px] leading-relaxed mb-10 text-ink-2">
+        Введи номер телефона. Мы отправим код в СМС.
+      </p>
+
+      <div class="mb-8">
+        <label class="field-label">Телефон</label>
+        <input id="phoneInput" type="tel" inputmode="numeric" placeholder="+7 999 123-45-67" class="input-field input-phone" maxlength="18" autocomplete="tel">
+      </div>
+
+      <button id="sendCodeBtn" class="btn-primary" disabled onclick="sendCode()">Получить код</button>
+
+      <p class="text-[11px] text-center mt-6 leading-relaxed text-ink-3">
+        Нажимая кнопку, ты соглашаешься<br>с условиями использования
+      </p>
+    </div>
+
+    <div id="reg-code" class="flex-1 flex flex-col justify-center py-12 relative z-10" style="display:none;">
+      <div class="mb-2 text-[10px] uppercase tracking-[0.28em] font-medium text-lime">Подтверждение</div>
+      <h1 class="font-semibold mb-3 text-h1">
+        Введи код<br>из СМС
+      </h1>
+      <p class="text-[13px] leading-relaxed mb-2 text-ink-2">
+        Отправили на <span id="phoneDisplay" class="text-ink font-medium"></span>
+      </p>
+      <p class="text-[11px] mb-6 text-ink-3">
+        <button class="btn-text text-[11px]" onclick="registrationBack()">← Изменить номер</button>
+      </p>
+
+      <div class="code-container">
+        <input type="tel" inputmode="numeric" maxlength="1" class="code-cell" data-index="0">
+        <input type="tel" inputmode="numeric" maxlength="1" class="code-cell" data-index="1">
+        <input type="tel" inputmode="numeric" maxlength="1" class="code-cell" data-index="2">
+        <input type="tel" inputmode="numeric" maxlength="1" class="code-cell" data-index="3">
+      </div>
+
+      <div class="text-center mb-6">
+        <button id="resendBtn" class="btn-text text-[12px] resend-lime" disabled>Отправить снова</button>
+        <div id="timerBox" class="text-[12px] mt-2 text-ink-3">через 60 сек</div>
+      </div>
+
+      <button id="verifyBtn" class="btn-primary" disabled onclick="verifyCode()">Войти</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 3: ОНБОРДИНГ ================= -->
+<div id="screen-onboarding" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative flex flex-col px-6 overflow-hidden">
+    <div class="hero-glow hero-glow-top"></div>
+
+    <div class="pt-6 pb-4 flex items-center justify-between gap-3 relative z-10">
+      <button class="btn-back" onclick="onboardingBack()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      </button>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="text-[11px] font-medium text-ink-3 step-counter" id="stepCounter">1 / 3</div>
+    </div>
+
+    <div id="step-pane-1" class="step-pane active flex-1">
+      <div class="flex-1 flex flex-col justify-center py-6">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 step-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="mb-2 text-[10px] uppercase tracking-[0.28em] font-medium text-lime">Шаг 1 из 3</div>
+        <h1 class="font-semibold mb-3 text-h1-lg">Как тебя<br>зовут?</h1>
+        <p class="text-[13px] leading-relaxed mb-7 text-ink-2">Это имя увидят в клубах и сервисах.</p>
+
+        <div class="space-y-5">
+          <div>
+            <label class="field-label">Фамилия</label>
+            <input id="lastNameInput" type="text" placeholder="Петров" class="input-field" autocomplete="family-name">
+          </div>
+          <div>
+            <label class="field-label">Имя</label>
+            <input id="firstNameInput" type="text" placeholder="Иван" class="input-field" autocomplete="given-name">
+          </div>
+          <div>
+            <label class="field-label">Дата рождения</label>
+            <input id="birthDateInput" type="date" class="input-field date-field">
+          </div>
+        </div>
+      </div>
+      <div class="pb-6">
+        <button id="step1Btn" class="btn-primary" disabled onclick="nextStep(2)">Продолжить</button>
+      </div>
+    </div>
+
+    <div id="step-pane-2" class="step-pane flex-1">
+      <div class="flex-1 flex flex-col justify-center py-6">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 step-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 17h14M5 17a2 2 0 1 1-4 0v-3.28a1 1 0 0 1 .684-.948l4.42-1.473a1 1 0 0 0 .463-.346l3.166-3.955a1 1 0 0 1 .78-.376h5.214a1 1 0 0 1 .78.376l3.166 3.955a1 1 0 0 0 .463.346l4.42 1.473A1 1 0 0 1 23 13.72V17a2 2 0 1 1-4 0M9 17a2 2 0 1 1-4 0M7 17h6"/>
+            <circle cx="7" cy="17" r="2"/>
+            <circle cx="17" cy="17" r="2"/>
+          </svg>
+        </div>
+        <div class="mb-2 text-[10px] uppercase tracking-[0.28em] font-medium text-lime">Шаг 2 из 3</div>
+        <h1 class="font-semibold mb-3 text-h1-lg">Какая у тебя<br>машина?</h1>
+        <p class="text-[13px] leading-relaxed mb-7 text-ink-2">Введи основное. Остальное можно добавить потом.</p>
+
+        <div class="space-y-5">
+          <div>
+            <label class="field-label">Марка</label>
+            <input id="brandInput" type="text" placeholder="Toyota" class="input-field" autocomplete="off">
+            <div class="suggestions" id="brandSuggestions"></div>
+          </div>
+          <div>
+            <label class="field-label">Модель</label>
+            <input id="modelInput" type="text" placeholder="Mark II" class="input-field" autocomplete="off">
+            <div class="suggestions" id="modelSuggestions"></div>
+          </div>
+          <div>
+            <label class="field-label">Пробег, км</label>
+            <input id="mileageInput" type="text" inputmode="numeric" placeholder="84 320" class="input-field input-mileage" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="pb-6">
+        <button id="step2Btn" class="btn-primary" disabled onclick="nextStep(3)">Продолжить</button>
+        <div class="text-center mt-2">
+          <button class="btn-text text-[13px] py-3" onclick="nextStep(3)">Пропустить</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="step-pane-3" class="step-pane flex-1">
+      <div class="flex-1 flex flex-col justify-center py-6">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 step-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="6" width="18" height="12" rx="1"/>
+            <path d="M15 6v12"/>
+          </svg>
+        </div>
+        <div class="mb-2 text-[10px] uppercase tracking-[0.28em] font-medium text-lime">Шаг 3 из 3</div>
+        <h1 class="font-semibold mb-3 text-h1-lg">Твой госномер</h1>
+        <p class="text-[13px] leading-relaxed mb-7 text-ink-2">Введи номер и регион, как на табличке.</p>
+
+        <div class="space-y-5">
+          <div>
+            <label class="field-label">Номер</label>
+            <input id="plateInput" type="text" placeholder="А000АА" class="input-field plate-input-field" maxlength="6" autocomplete="off">
+            <div class="field-hint" id="plateHint"></div>
+          </div>
+          <div>
+            <label class="field-label">Регион</label>
+            <input id="regionInput" type="text" inputmode="numeric" placeholder="14" class="input-field region-input-field" maxlength="3" autocomplete="off">
+            <div class="field-hint" id="regionHint"></div>
+          </div>
+        </div>
+
+        <div class="mt-7">
+          <div class="field-label">Как будет выглядеть</div>
+          <div class="plate-preview-center">
+            <svg class="plate-svg" viewBox="0 0 580 120" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="580" height="120" rx="10" fill="#FFFFFF"/>
+              <rect x="0" y="0" width="580" height="120" rx="10" fill="none" stroke="#000000" stroke-width="6"/>
+              <rect x="6" y="6" width="568" height="108" rx="5" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+              <line x1="436" y1="3" x2="436" y2="117" stroke="#000000" stroke-width="4"/>
+              <text id="svgL1" x="62" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">А</text>
+              <text id="svgD1" x="125" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">0</text>
+              <text id="svgD2" x="188" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">0</text>
+              <text id="svgD3" x="251" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">0</text>
+              <text id="svgL2" x="318" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">А</text>
+              <text id="svgL3" x="380" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">А</text>
+              <text id="svgRegion" x="508" y="48" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="40" fill="#000000" text-anchor="middle">000</text>
+              <text x="508" y="76" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="700" font-size="18" fill="#000000" text-anchor="middle">RUS</text>
+              <rect x="492" y="84" width="32" height="21" fill="#FFFFFF" stroke="#000000" stroke-width="1"/>
+              <rect x="492" y="84" width="32" height="7" fill="#FFFFFF"/>
+              <rect x="492" y="91" width="32" height="7" fill="#0039A6"/>
+              <rect x="492" y="98" width="32" height="7" fill="#D52B1E"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="pb-6">
+        <button id="step3Btn" class="btn-primary" disabled onclick="finishOnboarding()">Готово</button>
+        <div class="text-center mt-2">
+          <button class="btn-text text-[13px] py-3" onclick="finishOnboarding(true)">Пропустить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 4: ГЛАВНАЯ ================= -->
+<div id="screen-home" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center justify-between">
+        <button onclick="goTo('home')" class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-full flex items-center justify-center logo-circle">
+            <span class="text-[11px] font-bold logo-letter">А</span>
+          </div>
+          <span class="font-medium tracking-tight text-[15px]">Авто-ОС</span>
+        </button>
+        <button onclick="goTo('profile')" class="btn-icon-round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,245,0.65)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="px-5">
+      <div class="pt-6 pb-4">
+        <div class="text-[12px] tracking-tight greeting-warm" id="homeGreeting">Привет</div>
+        <div class="text-[12px] mt-0.5 text-ink-3">Всё под контролем</div>
+      </div>
+
+      <div class="relative pt-2 pb-6">
+        <div class="hero-glow hero-glow-home"></div>
+        <div class="relative">
+          <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-3 flex items-center text-ink-3">
+            <span class="live-dot"></span>
+            Моя машина
+          </div>
+          <div class="display" id="homeCarDisplay">Добавь<br><em class="lime-em">машину</em></div>
+          <div class="text-[12px] mt-4 text-ink-3" id="homeCarMeta">Пока нет данных</div>
+        </div>
+      </div>
+
+      <div class="card card-hover p-4 mb-6 card-accent-lime">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 card-accent-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[13px] font-semibold">Пока нет напоминаний</div>
+            <div class="text-[11px] mt-1 text-ink-2">Добавь машину, чтобы отслеживать</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-4 gap-2 mb-7 stagger">
+        <button onclick="openExpense()" class="quick-action">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,245,0.7)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v18"/><path d="M4 12h10"/><path d="M15 8h2a2 2 0 0 1 2 2v6a2 2 0 0 0 4 0V9l-3-3"/></svg>
+          <span class="text-[10.5px] font-medium">Расход</span>
+        </button>
+        <button onclick="goTo('services')" class="quick-action">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,245,0.7)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="text-[10.5px] font-medium">Сервисы</span>
+        </button>
+        <button onclick="goTo('help')" class="quick-action">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,245,0.7)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+          <span class="text-[10.5px] font-medium">Помощь</span>
+        </button>
+        <button onclick="goTo('clubs')" class="quick-action">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,245,0.7)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="text-[10.5px] font-medium">Клубы</span>
+        </button>
+      </div>
+
+      <div class="pt-5 pb-4 section-top-border">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-[13px] font-semibold tracking-tight">Последние расходы</h2>
+          <button onclick="goTo('expenses')" class="text-[11px] font-semibold text-lime link-btn">Все</button>
+        </div>
+
+        <div id="homeExpenses">
+          <div class="text-center py-12 text-ink-3">
+            <div class="text-[13px]">Пока пусто</div>
+            <div class="text-[11px] mt-1">Добавь первый расход кнопкой +</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 5: РАСХОДЫ ================= -->
+<div id="screen-expenses" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center justify-between">
+        <h1 class="font-medium tracking-tight text-[15px]">Расходы</h1>
+        <button onclick="alert('Экспорт PDF')" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-medium" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); color: rgba(245,245,245,0.8); cursor:pointer; font-family:inherit;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          PDF
+        </button>
+      </div>
+    </header>
+
+    <main class="px-5">
+      <div class="pt-6 pb-5">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-3 text-ink-3">В этом месяце</div>
+        <div class="flex items-baseline gap-2">
+          <div class="display" id="monthTotal">0</div>
+          <div class="text-[22px] font-medium text-ink-3 display-ruble">₽</div>
+        </div>
+        <div class="text-[12px] mt-2 text-ink-3" id="monthCount">Пока нет расходов</div>
+      </div>
+
+      <div class="flex gap-1 p-1 rounded-xl mb-4" style="background: rgba(255,255,255,0.03);">
+        <button id="expViewList" class="flex-1 py-2 rounded-lg text-[11.5px] font-semibold" style="background:#C6FF3D;color:#0A0A0A;border:none;cursor:pointer;font-family:inherit;" onclick="setExpenseView('list')">Список</button>
+        <button id="expViewDays" class="flex-1 py-2 rounded-lg text-[11.5px] font-medium" style="color:rgba(245,245,245,0.5);background:none;border:none;cursor:pointer;font-family:inherit;" onclick="setExpenseView('days')">По дням</button>
+      </div>
+
+      <div id="expensesList">
+        <div class="text-center py-16 text-ink-3">
+          <div class="text-[13px]">Пока нет расходов</div>
+          <div class="text-[11px] mt-1">Нажми + внизу, чтобы добавить</div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 6: ОБСЛУЖИВАНИЕ ================= -->
+<div id="screen-maintenance" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center justify-between">
+        <h1 class="font-medium tracking-tight text-[15px]">Обслуживание</h1>
+        <button onclick="openAddPart()" class="btn-add-circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        </button>
+      </div>
+    </header>
+    <main class="px-5">
+      <div class="pt-6 pb-5">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-3 text-ink-3">Состояние машины</div>
+        <div class="display">Обслуживание</div>
+      </div>
+      <div class="space-y-3" id="partsList"></div>
+    </main>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 7: СЕРВИСЫ (список) ================= -->
+<div id="screen-services" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4">
+        <div class="flex items-center justify-between mb-4">
+          <button onclick="goTo('home')" class="btn-back" style="width:36px;height:36px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+          </button>
+          <h1 class="font-medium tracking-tight text-[15px]">Сервисы</h1>
+          <div style="width:36px;"></div>
+        </div>
+
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input type="text" placeholder="Найти сервис или мастера" oninput="filterServices(this.value)">
+        </div>
+      </div>
+    </header>
+
+    <main class="px-5">
+      <div class="pt-6 pb-5">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-2 text-ink-3">Проверенные рядом</div>
+        <div class="display">Твои<br>мастера</div>
+      </div>
+
+      <div class="filters-scroll mb-4">
+        <div class="flex gap-2">
+          <button class="filter-chip active" data-cat="all" onclick="selectServiceCategory(this)">Все</button>
+          <button class="filter-chip" data-cat="engine" onclick="selectServiceCategory(this)">Двигатель</button>
+          <button class="filter-chip" data-cat="body" onclick="selectServiceCategory(this)">Кузов</button>
+          <button class="filter-chip" data-cat="electric" onclick="selectServiceCategory(this)">Электрика</button>
+          <button class="filter-chip" data-cat="suspension" onclick="selectServiceCategory(this)">Подвеска</button>
+          <button class="filter-chip" data-cat="tires" onclick="selectServiceCategory(this)">Шиномонтаж</button>
+        </div>
+      </div>
+
+      <div class="space-y-4" id="servicesList"></div>
+
+      <div class="text-center pt-6 pb-4 text-[11px] text-ink-3" id="servicesCount">
+        Показано 3 из 3 сервисов
+      </div>
+    </main>
+  </div>
+</div>
+<!-- ПРОДОЛЖЕНИЕ СЛЕДУЕТ -->
+<!-- ================= ЭКРАН 8: КАРТОЧКА СЕРВИСА ================= -->
+<div id="screen-service-detail" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+
+    <!-- Обложка -->
+    <div class="service-detail-cover">
+      <div class="pattern"></div>
+      <div class="absolute top-0 left-0 right-0 px-5 pt-6 pb-4 flex items-center justify-between z-10">
+        <button onclick="goTo('services')" class="header-btn-glass">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <div class="flex gap-2">
+          <button onclick="alert('Позвонить')" class="header-btn-glass">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </button>
+          <button onclick="alert('Поделиться')" class="header-btn-glass">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="page" style="margin-top: -80px; position: relative; z-index: 2;">
+      <div class="px-5 pb-5">
+        <div class="stagger">
+          <div class="mb-3">
+            <span class="verified-badge" style="position: static;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Проверен
+            </span>
+          </div>
+
+          <h1 class="font-semibold tracking-tight mb-4 service-detail-title" id="detailServiceName">
+            Автосервис<br>на Ленина
+          </h1>
+
+          <div class="flex items-center gap-4 mb-5">
+            <div class="rating-block">
+              <div class="rating-big" id="detailRating">4.8</div>
+              <div>
+                <div class="rating-stars">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                </div>
+                <div class="text-[11px] mt-0.5 text-ink-3" id="detailReviews">127 отзывов</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2" id="detailTags">
+            <span class="tag">Двигатель</span>
+            <span class="tag">Электрика</span>
+            <span class="tag">Подвеска</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5">
+        <div class="tabs">
+          <button class="tab active" onclick="switchServiceTab(0, this)">О сервисе</button>
+          <button class="tab" onclick="switchServiceTab(1, this)">Мастера · 3</button>
+          <button class="tab" onclick="switchServiceTab(2, this)">Отзывы · 127</button>
+          <button class="tab" onclick="switchServiceTab(3, this)">Работы</button>
+        </div>
+      </div>
+
+      <div class="px-5 pt-5">
+        <!-- О СЕРВИСЕ -->
+        <div id="serviceTab0" class="stagger space-y-5">
+          <p class="text-[14px] leading-relaxed text-ink-2">
+            Профессиональный автосервис с 12-летним опытом. Специализируемся на японских и европейских автомобилях. Работаем с оригинальными запчастями и аналогами премиум-класса. Даём гарантию на все работы.
+          </p>
+
+          <div class="rounded-2xl overflow-hidden" style="background: #131313; border: 1px solid rgba(255,255,255,0.055);">
+            <div class="info-row px-4">
+              <div class="info-row-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="flex-1">
+                <div class="info-row-label">Адрес</div>
+                <div class="info-row-value">ул. Ленина, 42 · 1.2 км</div>
+              </div>
+            </div>
+
+            <div class="info-row px-4">
+              <div class="info-row-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="flex-1">
+                <div class="info-row-label">Часы работы</div>
+                <div class="info-row-value open-badge"><span class="dot"></span>Открыто до 20:00 · пн–сб</div>
+              </div>
+            </div>
+
+            <div class="info-row px-4">
+              <div class="info-row-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="flex-1">
+                <div class="info-row-label">Телефон</div>
+                <div class="info-row-value">+7 (999) 123-45-67</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- МАСТЕРА -->
+        <div id="serviceTab1" class="hidden stagger space-y-3">
+          <div class="master-card" onclick="openMasterDetail(1)">
+            <div class="flex items-start gap-3 mb-3">
+              <div class="avatar avatar-a1">И</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <div class="font-semibold text-[15px] truncate">Иван Смирнов</div>
+                  <span class="status-badge free"><span class="dot"></span>Свободен</span>
+                </div>
+                <div class="text-[11.5px] text-ink-2">Двигатель · Электрика · 12 лет опыта</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="rating" style="display:flex; align-items:center; gap:6px; color:#C6FF3D; font-size:12.5px; font-weight:600;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                4.9
+                <span style="color: rgba(245,245,245,0.4); font-weight: 500;">(64 отзыва)</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag">Замена масла · 340 раз</span>
+              <span class="tag">Диагностика · 210 раз</span>
+            </div>
+            <button class="btn-book w-full" onclick="event.stopPropagation(); openBookingForMaster(1)">Записаться к мастеру</button>
+          </div>
+
+          <div class="master-card" onclick="openMasterDetail(2)">
+            <div class="flex items-start gap-3 mb-3">
+              <div class="avatar avatar-a2">П</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <div class="font-semibold text-[15px] truncate">Пётр Иванов</div>
+                  <span class="status-badge busy"><span class="dot"></span>Занят</span>
+                </div>
+                <div class="text-[11.5px] text-ink-2">Кузов · Подвеска · 8 лет опыта</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="rating" style="display:flex; align-items:center; gap:6px; color:#C6FF3D; font-size:12.5px; font-weight:600;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                4.7
+                <span style="color: rgba(245,245,245,0.4); font-weight: 500;">(38 отзывов)</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag">Развал-схождение · 180 раз</span>
+              <span class="tag">Замена стоек · 95 раз</span>
+            </div>
+            <button class="btn-book w-full" onclick="event.stopPropagation(); openBookingForMaster(2)">Записаться к мастеру</button>
+          </div>
+
+          <div class="master-card" onclick="openMasterDetail(3)">
+            <div class="flex items-start gap-3 mb-3">
+              <div class="avatar avatar-a3">А</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <div class="font-semibold text-[15px] truncate">Алексей Кузнецов</div>
+                  <span class="status-badge free"><span class="dot"></span>Свободен</span>
+                </div>
+                <div class="text-[11.5px] text-ink-2">Диагностика · Электрика · 15 лет опыта</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="rating" style="display:flex; align-items:center; gap:6px; color:#C6FF3D; font-size:12.5px; font-weight:600;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                5.0
+                <span style="color: rgba(245,245,245,0.4); font-weight: 500;">(25 отзывов)</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag">Компьютерная диагностика · 420 раз</span>
+            </div>
+            <button class="btn-book w-full" onclick="event.stopPropagation(); openBookingForMaster(3)">Записаться к мастеру</button>
+          </div>
+        </div>
+
+        <!-- ОТЗЫВЫ -->
+        <div id="serviceTab2" class="hidden">
+          <div class="review-card">
+            <div class="review-head">
+              <div class="review-avatar">А</div>
+              <div>
+                <div class="text-[13px] font-medium">Андрей</div>
+                <div class="text-[11px] text-ink-3">3 дня назад</div>
+              </div>
+              <div class="review-stars">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              </div>
+            </div>
+            <div class="text-[13px] leading-relaxed" style="color: rgba(245,245,245,0.8);">
+              Поменял масло и фильтры. Иван всё сделал аккуратно, показал что заливает, объяснил что и когда менять в следующий раз. Рекомендую.
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-head">
+              <div class="review-avatar">М</div>
+              <div>
+                <div class="text-[13px] font-medium">Марина</div>
+                <div class="text-[11px] text-ink-3">неделю назад</div>
+              </div>
+              <div class="review-stars">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              </div>
+            </div>
+            <div class="text-[13px] leading-relaxed" style="color: rgba(245,245,245,0.8);">
+              Отличный мастер. Разобрался с проблемой, которую до него не могли найти. Езжу только к нему.
+            </div>
+          </div>
+        </div>
+
+        <!-- РАБОТЫ -->
+        <div id="serviceTab3" class="hidden text-center py-12 text-ink-3">
+          <div class="text-[14px] mb-1">История работ сервиса</div>
+          <div class="text-[12px]">В разработке</div>
+        </div>
+      </div>
+    </main>
+
+    <div class="bottom-bar">
+      <button class="btn-primary" onclick="openBookingForMaster(1)">Записаться в сервис</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 9: КАРТОЧКА МАСТЕРА ================= -->
+<div id="screen-master-detail" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <div class="master-hero">
+      <div class="hero-glow" style="top: 60px;"></div>
+      <div class="absolute top-0 left-0 right-0 px-5 pt-6 pb-4 flex items-center justify-between z-10">
+        <button onclick="goTo('service-detail')" class="header-btn-glass">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <div class="flex gap-2">
+          <button onclick="alert('Позвонить')" class="header-btn-glass">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </button>
+          <button onclick="alert('Поделиться')" class="header-btn-glass">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="relative stagger">
+        <div class="flex flex-col items-center text-center mb-6">
+          <div class="big-avatar" id="masterAvatar">И</div>
+          <div class="master-name" id="masterName">Иван Смирнов</div>
+          <div class="text-[12.5px] mb-4 text-ink-2" id="masterService">Автосервис на Ленина</div>
+          <div class="status-line"><span class="dot"></span>Свободен · ответит за ~5 мин</div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value" style="color: #C6FF3D;" id="masterRatingBig">4.9</div>
+            <div class="stat-label">Рейтинг</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="masterReviewsBig">64</div>
+            <div class="stat-label">Отзыва</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="masterExpBig">12</div>
+            <div class="stat-label">Лет опыта</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="px-5 page">
+      <div class="section">
+        <div class="section-title">Что делает чаще всего</div>
+        <div>
+          <div class="skill-row">
+            <div class="skill-name">
+              <div class="skill-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+              </div>
+              Замена масла
+            </div>
+            <span class="skill-count">340 раз</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">
+              <div class="skill-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              </div>
+              Компьютерная диагностика
+            </div>
+            <span class="skill-count">210 раз</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">
+              <div class="skill-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/></svg>
+              </div>
+              Замена свечей
+            </div>
+            <span class="skill-count">128 раз</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">
+              <div class="skill-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              Замена колодок
+            </div>
+            <span class="skill-count">95 раз</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Последние работы</div>
+        <div>
+          <div class="work-row">
+            <div class="work-dot"></div>
+            <div class="flex-1">
+              <div class="work-text">Замена масла · Toyota Camry</div>
+              <div class="work-meta">2 дня назад</div>
+            </div>
+          </div>
+          <div class="work-row">
+            <div class="work-dot"></div>
+            <div class="flex-1">
+              <div class="work-text">Диагностика двигателя · BMW 3 Series</div>
+              <div class="work-meta">4 дня назад</div>
+            </div>
+          </div>
+          <div class="work-row">
+            <div class="work-dot"></div>
+            <div class="flex-1">
+              <div class="work-text">Замена свечей · Kia Rio</div>
+              <div class="work-meta">неделю назад</div>
+            </div>
+          </div>
+          <div class="work-row">
+            <div class="work-dot"></div>
+            <div class="flex-1">
+              <div class="work-text">Замена масла · Hyundai Solaris</div>
+              <div class="work-meta">2 недели назад</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          Отзывы · 64
+          <button class="ml-auto text-[11px] font-medium link-btn" style="color:#C6FF3D;">Все</button>
+        </div>
+
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">А</div>
+            <div>
+              <div class="text-[13px] font-medium">Андрей</div>
+              <div class="text-[11px] text-ink-3">3 дня назад</div>
+            </div>
+            <div class="review-stars">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+            </div>
+          </div>
+          <div class="text-[13px] leading-relaxed" style="color: rgba(245,245,245,0.8);">
+            Поменял масло и фильтры. Иван всё сделал аккуратно, показал что заливает, объяснил что и когда менять в следующий раз. Рекомендую.
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">М</div>
+            <div>
+              <div class="text-[13px] font-medium">Марина</div>
+              <div class="text-[11px] text-ink-3">неделю назад</div>
+            </div>
+            <div class="review-stars">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#C6FF3D"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/></svg>
+            </div>
+          </div>
+          <div class="text-[13px] leading-relaxed" style="color: rgba(245,245,245,0.8);">
+            Отличный мастер. Разобрался с проблемой, которую до него не могли найти. Езжу только к нему.
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="bottom-bar">
+      <button class="btn-ghost" style="width: 56px; flex-shrink: 0; padding: 14px 0;" onclick="alert('Написать сообщение')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+      <button class="btn-primary" style="flex: 1;" onclick="openBookingForMaster(currentMasterId)">Записаться к мастеру</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 10: ЗАПИСЬ В СЕРВИС ================= -->
+<div id="screen-booking" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center gap-3">
+        <button class="btn-back" onclick="bookingBack()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <h1 class="font-medium tracking-tight text-[15px]">Запись в сервис</h1>
+      </div>
+    </header>
+
+    <main class="px-5 page">
+      <div class="pt-6 pb-5 stagger">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-2 text-ink-3">Шаг 2 из 2</div>
+        <div class="display">Опиши<br>проблему</div>
+      </div>
+
+      <div class="selected-card mb-6" id="bookingMasterCard">
+        <div class="selected-avatar" id="bookingMasterAvatar">И</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[11px] text-ink-3">Мастер</div>
+          <div class="font-semibold text-[14px] mt-0.5" id="bookingMasterName">Иван Смирнов</div>
+          <div class="text-[11px] mt-0.5 text-ink-3" id="bookingMasterService">Автосервис на Ленина</div>
+        </div>
+        <button onclick="goTo('service-detail')" style="font-size:11px; font-weight:500; color:#C6FF3D; background:none; border:none; cursor:pointer; font-family:inherit;">Сменить</button>
+      </div>
+
+      <div class="mb-6">
+        <label class="field-label">Что случилось?</label>
+        <div class="flex flex-wrap gap-2 mb-4" id="bookingQuickChips">
+          <button class="quick-chip" onclick="toggleBookingChip(this, 'Стучит двигатель')">Стучит двигатель</button>
+          <button class="quick-chip" onclick="toggleBookingChip(this, 'Горит чек')">Горит чек</button>
+          <button class="quick-chip" onclick="toggleBookingChip(this, 'Скрипят тормоза')">Скрипят тормоза</button>
+          <button class="quick-chip" onclick="toggleBookingChip(this, 'Троит двигатель')">Троит</button>
+          <button class="quick-chip" onclick="toggleBookingChip(this, 'Замена масла')">Замена масла</button>
+          <button class="quick-chip" onclick="toggleBookingChip(this, 'Диагностика')">Диагностика</button>
+        </div>
+
+        <textarea id="bookingProblem" rows="4" placeholder="Опиши своими словами, что беспокоит..." class="booking-textarea"></textarea>
+        <div class="text-[11px] mt-2 text-ink-3">Мастер прочитает и назначит время</div>
+      </div>
+
+      <div class="mb-6">
+        <label class="field-label">Когда удобно?</label>
+        <div class="grid grid-cols-4 gap-2 mb-3">
+          <button class="slot" onclick="selectBookingDay(this)">Сегодня</button>
+          <button class="slot active" onclick="selectBookingDay(this)">Завтра</button>
+          <button class="slot" onclick="selectBookingDay(this)">21 окт</button>
+          <button class="slot" onclick="selectBookingDay(this)">22 окт</button>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          <button class="slot" onclick="selectBookingTime(this)">9:00</button>
+          <button class="slot" onclick="selectBookingTime(this)">11:00</button>
+          <button class="slot" onclick="selectBookingTime(this)" disabled>13:00</button>
+          <button class="slot active" onclick="selectBookingTime(this)">15:00</button>
+          <button class="slot" onclick="selectBookingTime(this)">17:00</button>
+          <button class="slot" onclick="selectBookingTime(this)" disabled>18:00</button>
+          <button class="slot" onclick="selectBookingTime(this)">19:00</button>
+          <button class="slot" onclick="selectBookingTime(this)">20:00</button>
+        </div>
+      </div>
+
+      <div class="info-box mb-6">
+        <div style="color:#C6FF3D; flex-shrink: 0; margin-top: 1px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+          </svg>
+        </div>
+        <div class="text-[12px] leading-relaxed" style="color: rgba(245,245,245,0.7);">
+          После отправки мастер получит уведомление и подтвердит запись. Обычно отвечает в течение 5 минут.
+        </div>
+      </div>
+    </main>
+
+    <div class="bottom-bar">
+      <button class="btn-primary" id="submitBookingBtn" onclick="submitBooking()">Отправить заявку</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 11: СОГЛАСОВАНИЕ СМЕТЫ ================= -->
+<div id="screen-estimate" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center gap-3">
+        <button class="btn-back" onclick="goTo('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <h1 class="font-medium tracking-tight text-[15px]">Заявка №2847</h1>
+      </div>
+    </header>
+
+    <main class="px-5 pt-5 page">
+      <div class="status-card-warning mb-5">
+        <div class="status-label-warning">
+          <span class="pulse-warning"></span>
+          Ждёт твоего решения
+        </div>
+        <div class="status-title-lg">Мастер прислал смету</div>
+        <div class="status-desc">
+          Иван посмотрел машину и составил список работ. Проверь и согласуй, чтобы он приступил.
+        </div>
+      </div>
+
+      <div class="info-card mb-5 stagger">
+        <div class="info-row">
+          <div class="info-row-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="flex-1">
+            <div class="info-row-label">Когда</div>
+            <div class="info-row-value">Сегодня · 15:00</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-row-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="flex-1">
+            <div class="info-row-label">Где</div>
+            <div class="info-row-value">Автосервис на Ленина</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-row-icon" style="background: rgba(198,255,61,0.1); color: #C6FF3D;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="flex-1">
+            <div class="info-row-label">Мастер</div>
+            <div class="info-row-value">Иван Смирнов</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="estimate-section">
+        <div class="section-title">
+          Смета от мастера
+          <span style="margin-left: auto; font-size: 11px; font-weight: 500; color: rgba(245,245,245,0.4);">4 работы</span>
+        </div>
+        <div class="section-sub">Согласуй — мастер начнёт работу</div>
+
+        <div>
+          <div class="work-row">
+            <div class="work-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="work-name">Замена моторного масла</div>
+              <div class="work-meta">Масло Mobil 1 5W-30 · фильтр оригинал</div>
+            </div>
+            <div class="text-right">
+              <div class="work-price">4 800 ₽</div>
+              <div class="work-price-note">масло + работа</div>
+            </div>
+          </div>
+
+          <div class="work-row">
+            <div class="work-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="work-name">Замена воздушного фильтра</div>
+              <div class="work-meta">Фильтр Mahle</div>
+            </div>
+            <div class="text-right">
+              <div class="work-price">1 200 ₽</div>
+              <div class="work-price-note">фильтр + работа</div>
+            </div>
+          </div>
+
+          <div class="work-row">
+            <div class="work-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="work-name">Замена колодок передних</div>
+              <div class="work-meta">Колодки Brembo · обе стороны</div>
+            </div>
+            <div class="text-right">
+              <div class="work-price">5 200 ₽</div>
+              <div class="work-price-note">колодки + работа</div>
+            </div>
+          </div>
+
+          <div class="work-row">
+            <div class="work-icon" style="background: rgba(232,182,92,0.1); color: #E8B65C;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9"/><path d="M18 15l4-4-7-7-4 4 7 7z"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="work-name">Замена масляного фильтра</div>
+              <div class="work-meta" style="color: rgba(232,182,92,0.85);">Фильтр твой · только работа</div>
+            </div>
+            <div class="text-right">
+              <div class="work-price">600 ₽</div>
+              <div class="work-price-note" style="color: rgba(232,182,92,0.85);">деталь клиента</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-card">
+          <div class="total-main">
+            <div class="total-main-label">Итого к согласованию</div>
+            <div class="total-main-value">11 800 ₽</div>
+          </div>
+          <div class="total-row">
+            <span>Работы мастера</span>
+            <span>3 200 ₽</span>
+          </div>
+          <div class="total-row">
+            <span>Запчасти сервиса</span>
+            <span>8 000 ₽</span>
+          </div>
+          <div class="total-row">
+            <span>Твои запчасти</span>
+            <span>600 ₽ (только работа)</span>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 16px;">
+          <div style="color:#C6FF3D; flex-shrink: 0; margin-top: 1px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+            </svg>
+          </div>
+          <div class="text-[12px] leading-relaxed" style="color: rgba(245,245,245,0.7);">
+            Если в процессе найдём что-то ещё — пришлём отдельную смету на согласование. Без твоего «ок» ничего делать не будем.
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="bottom-bar">
+      <button class="btn-ghost" style="flex: 0 0 48px; padding: 16px 0;" onclick="alert('Открыть чат с мастером')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+      <button class="btn-primary" style="flex: 1;" onclick="approveEstimate()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        Согласовать и в работу
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 12: АНАЛИТИКА ================= -->
+<div id="screen-analytics" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center justify-between">
+        <h1 class="font-medium tracking-tight text-[15px]">Аналитика</h1>
+        <button onclick="alert('Экспорт PDF')" class="text-[11px] font-medium link-btn" style="color:#C6FF3D;">Экспорт</button>
+      </div>
+    </header>
+
+    <main class="px-5 page">
+      <div class="pt-6 pb-5">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-2 text-ink-3">Куда уходят деньги</div>
+        <div class="display">Куда<br>уходит</div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 mb-5 stagger">
+        <div class="metric-card">
+          <div class="metric-label">За месяц</div>
+          <div class="metric-value">13 250 ₽</div>
+          <div class="metric-diff up">+ 8% к сентябрю</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">За год</div>
+          <div class="metric-value">184 500 ₽</div>
+          <div class="metric-diff neutral">За 2025 год</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Стоимость км</div>
+          <div class="metric-value">12.4 ₽</div>
+          <div class="metric-diff down">− 4% к прошлому</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Средний чек</div>
+          <div class="metric-value">1 893 ₽</div>
+          <div class="metric-diff neutral">7 записей</div>
+        </div>
+      </div>
+
+      <div class="forecast-card mb-6">
+        <div class="relative">
+          <div class="text-[10px] uppercase tracking-[0.2em] font-semibold mb-3" style="color:#C6FF3D;">Прогноз на год</div>
+          <div class="forecast-amount">~224 000 ₽</div>
+          <div class="text-[12px] text-ink-2">На основе среднего за 3 месяца</div>
+        </div>
+      </div>
+
+      <div class="pt-5 mb-6 section-top-border">
+        <h2 class="section-title-sm mb-4">По категориям за месяц</h2>
+
+        <div class="space-y-3">
+          <div class="cat-row">
+            <div class="cat-header">
+              <div class="cat-name">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 22V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v18"/><path d="M4 12h10"/><path d="M15 8h2a2 2 0 0 1 2 2v6a2 2 0 0 0 4 0V9l-3-3"/></svg>
+                Топливо
+              </div>
+              <div class="cat-sum">7 200 ₽</div>
+            </div>
+            <div class="cat-bar"><div class="cat-fill fuel" style="width: 55%;"></div></div>
+          </div>
+
+          <div class="cat-row">
+            <div class="cat-header">
+              <div class="cat-name">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                Сервис
+              </div>
+              <div class="cat-sum">6 800 ₽</div>
+            </div>
+            <div class="cat-bar"><div class="cat-fill svc" style="width: 90%;"></div></div>
+          </div>
+
+          <div class="cat-row">
+            <div class="cat-header">
+              <div class="cat-name">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+                Мойка
+              </div>
+              <div class="cat-sum">600 ₽</div>
+            </div>
+            <div class="cat-bar"><div class="cat-fill wash" style="width: 8%;"></div></div>
+          </div>
+
+          <div class="cat-row">
+            <div class="cat-header">
+              <div class="cat-name">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                Другое
+              </div>
+              <div class="cat-sum">650 ₽</div>
+            </div>
+            <div class="cat-bar"><div class="cat-fill other" style="width: 9%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-5 mb-6 section-top-border">
+        <h2 class="section-title-sm mb-5">Динамика по месяцам</h2>
+        <div class="chart-wrap">
+          <div class="chart-col">
+            <div class="chart-bar" style="height: 45%;"><div class="chart-bar-fill" style="height: 100%;"></div></div>
+            <div class="chart-label">май</div>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar" style="height: 65%;"><div class="chart-bar-fill" style="height: 100%;"></div></div>
+            <div class="chart-label">июн</div>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar" style="height: 40%;"><div class="chart-bar-fill" style="height: 100%;"></div></div>
+            <div class="chart-label">июл</div>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar" style="height: 75%;"><div class="chart-bar-fill" style="height: 100%;"></div></div>
+            <div class="chart-label">авг</div>
+          </div>
+          <div class="chart-col">
+            <div class="chart-bar" style="height: 55%;"><div class="chart-bar-fill" style="height: 100%;"></div></div>
+            <div class="chart-label">сен</div>
+          </div>
+          <div class="chart-col current">
+            <div class="chart-bar" style="height: 90%;"><div class="chart-bar-fill" style="height: 100%;"></div></div>
+            <div class="chart-label">окт</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-5 mb-6 section-top-border">
+        <h2 class="section-title-sm mb-3">Топ трат</h2>
+        <div>
+          <div class="top-row">
+            <div class="flex items-center gap-3 min-w-0 flex-1">
+              <div class="top-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div class="min-w-0">
+                <div class="text-[13px] font-medium truncate">Замена масла</div>
+                <div class="text-[11px] mt-0.5 text-ink-3">12 окт · Автосервис на Ленина</div>
+              </div>
+            </div>
+            <div class="font-semibold text-[13.5px]">6 800 ₽</div>
+          </div>
+          <div class="top-row">
+            <div class="flex items-center gap-3 min-w-0 flex-1">
+              <div class="top-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 22V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v18"/><path d="M4 12h10"/></svg>
+              </div>
+              <div class="min-w-0">
+                <div class="text-[13px] font-medium truncate">Заправка, 45 л</div>
+                <div class="text-[11px] mt-0.5 text-ink-3">Сегодня</div>
+              </div>
+            </div>
+            <div class="font-semibold text-[13.5px]">3 450 ₽</div>
+          </div>
+          <div class="top-row">
+            <div class="flex items-center gap-3 min-w-0 flex-1">
+              <div class="top-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/></svg>
+              </div>
+              <div class="min-w-0">
+                <div class="text-[13px] font-medium truncate">АКБ Varta</div>
+                <div class="text-[11px] mt-0.5 text-ink-3">28 сен · сам</div>
+              </div>
+            </div>
+            <div class="font-semibold text-[13.5px]">5 200 ₽</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<!-- ПРОДОЛЖЕНИЕ СЛЕДУЕТ -->
+<!-- ================= ЭКРАН 13: ДОКУМЕНТЫ ================= -->
+<div id="screen-documents" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center gap-3">
+        <button class="btn-back" onclick="goTo('profile')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <h1 class="font-medium tracking-tight text-[15px]">Документы</h1>
+        <button onclick="alert('Добавить документ')" class="btn-add-circle" style="margin-left:auto;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="px-5 page">
+      <div class="pt-6 pb-5">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-3 text-ink-3">Всего 6 документов</div>
+        <div class="display">Всё<br>оформлено</div>
+      </div>
+
+      <div class="stats mb-6 stagger">
+        <div>
+          <div class="stat-value" style="color:#F5F5F5;">5</div>
+          <div class="stat-label">Активных</div>
+        </div>
+        <div>
+          <div class="stat-value" style="color:#E8B65C;">1</div>
+          <div class="stat-label">Истекает</div>
+        </div>
+        <div>
+          <div class="stat-value" style="color:#FF3D2E;">0</div>
+          <div class="stat-label">Просрочен</div>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <div class="doc-card soon">
+          <div class="doc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <div class="text-[14px] font-semibold">ОСАГО</div>
+              <span class="status-badge soon">20 дней</span>
+            </div>
+            <div class="doc-number">ХХХ 0123456789</div>
+            <div class="doc-date">Действует до 15 ноября 2025</div>
+            <div class="doc-bar"><div class="doc-fill soon" style="width: 85%;"></div></div>
+          </div>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <div class="text-[14px] font-semibold">КАСКО</div>
+              <span class="status-badge ok">ОК</span>
+            </div>
+            <div class="doc-number">ХХХ 9876543210</div>
+            <div class="doc-date">Действует до 20 марта 2026</div>
+            <div class="doc-bar"><div class="doc-fill ok" style="width: 45%;"></div></div>
+          </div>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 2v20l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2V2l-2 2-2-2-2 2-2-2-2 2-2-2-2 2z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <div class="text-[14px] font-semibold">Техосмотр</div>
+              <span class="status-badge ok">ОК</span>
+            </div>
+            <div class="doc-number">№ 0123456789</div>
+            <div class="doc-date">Действует до 15 марта 2026</div>
+            <div class="doc-bar"><div class="doc-fill ok" style="width: 40%;"></div></div>
+          </div>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 2v20l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2V2l-2 2-2-2-2 2-2-2-2 2-2-2-2 2z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <div class="text-[14px] font-semibold">Транспортный налог</div>
+              <span class="status-badge ok">Оплачен</span>
+            </div>
+            <div class="doc-date">Оплачен 15 сентября 2025</div>
+            <div class="doc-date">8 400 ₽</div>
+          </div>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <div class="text-[14px] font-semibold">СТС</div>
+              <span class="status-badge ok">ОК</span>
+            </div>
+            <div class="doc-number">77 АА 123456</div>
+            <div class="doc-date">Постоянный документ</div>
+          </div>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <div class="text-[14px] font-semibold">Водительские права</div>
+              <span class="status-badge ok">ОК</span>
+            </div>
+            <div class="doc-number">77 АА 987654</div>
+            <div class="doc-date">Действует до 20 июня 2030</div>
+            <div class="doc-bar"><div class="doc-fill ok" style="width: 15%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 14: НАПОМИНАНИЯ ================= -->
+<div id="screen-reminders" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center gap-3">
+        <button class="btn-back" onclick="goTo('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <h1 class="font-medium tracking-tight text-[15px]">Напоминания</h1>
+        <button onclick="alert('Новое напоминание')" class="btn-add-circle" style="margin-left:auto;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="px-5 page">
+      <div class="pt-6 pb-5">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-2 text-ink-3">Всего 4 напоминания</div>
+        <div class="display">Не забыть<br>важное</div>
+      </div>
+
+      <div class="flex gap-1 p-1 rounded-xl mb-4" style="background: rgba(255,255,255,0.03);">
+        <button class="flex-1 py-2 rounded-lg text-[11.5px] font-semibold" style="background:#C6FF3D;color:#0A0A0A;border:none;cursor:pointer;font-family:inherit;">Все 4</button>
+        <button class="flex-1 py-2 rounded-lg text-[11.5px] font-medium" style="color:rgba(245,245,245,0.5);background:none;border:none;cursor:pointer;font-family:inherit;">Активные</button>
+        <button class="flex-1 py-2 rounded-lg text-[11.5px] font-medium" style="color:rgba(245,245,245,0.5);background:none;border:none;cursor:pointer;font-family:inherit;">Готово</button>
+      </div>
+
+      <div class="space-y-2">
+        <div class="group-title">Просрочено</div>
+        <div class="reminder overdue">
+          <div class="reminder-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="reminder-title">Замена масла</div>
+            <div class="reminder-sub overdue">Просрочено на 1 500 км</div>
+          </div>
+          <div class="reminder-actions">
+            <button class="action-btn check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button>
+            <button class="action-btn del"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+
+        <div class="group-title">Скоро</div>
+        <div class="reminder soon">
+          <div class="reminder-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="reminder-title">ОСАГО истекает</div>
+            <div class="reminder-sub soon">Через 20 дней · 15 ноября</div>
+          </div>
+          <div class="reminder-actions">
+            <button class="action-btn check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button>
+            <button class="action-btn del"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+
+        <div class="reminder soon">
+          <div class="reminder-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="reminder-title">Колодки передние</div>
+            <div class="reminder-sub soon">Через 2 000 км</div>
+          </div>
+          <div class="reminder-actions">
+            <button class="action-btn check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button>
+            <button class="action-btn del"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+
+        <div class="group-title">Всё в порядке</div>
+        <div class="reminder ok">
+          <div class="reminder-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="reminder-title">Проверить АКБ</div>
+            <div class="reminder-sub">Через 3 месяца</div>
+          </div>
+          <div class="reminder-actions">
+            <button class="action-btn check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button>
+            <button class="action-btn del"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 15: КЛУБЫ (СПИСОК) ================= -->
+<div id="screen-clubs" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center justify-between">
+        <h1 class="font-medium tracking-tight text-[15px]">Клубы</h1>
+        <button onclick="alert('Создать клуб')" class="w-10 h-10 rounded-full flex items-center justify-center" style="background: #C6FF3D; color: #0A0A0A; border: none; cursor: pointer; box-shadow: 0 0 20px -4px rgba(198,255,61,0.4);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="px-5 page">
+      <div class="pt-6 pb-5">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-2 text-ink-3">Свои люди</div>
+        <div class="display">Найди<br>своих</div>
+      </div>
+
+      <div class="flex gap-1 p-1 rounded-xl mb-4" style="background: rgba(255,255,255,0.03);">
+        <button class="flex-1 py-2 rounded-lg text-[11.5px] font-semibold" style="background:#C6FF3D;color:#0A0A0A;border:none;cursor:pointer;font-family:inherit;">Мои 2</button>
+        <button class="flex-1 py-2 rounded-lg text-[11.5px] font-medium" style="color:rgba(245,245,245,0.5);background:none;border:none;cursor:pointer;font-family:inherit;">Все 248</button>
+      </div>
+
+      <div class="search-box mb-4">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" placeholder="Найти клуб по марке или городу">
+      </div>
+
+      <div class="filters-scroll mb-4">
+        <div class="flex gap-2">
+          <button class="filter-chip active">Все</button>
+          <button class="filter-chip">По марке</button>
+          <button class="filter-chip">По городу</button>
+          <button class="filter-chip">По стилю</button>
+          <button class="filter-chip">Тюнинг</button>
+          <button class="filter-chip">Ретро</button>
+        </div>
+      </div>
+
+      <div class="space-y-4 stagger">
+        <div class="club-card" onclick="openClubDetail(1)">
+          <div class="club-cover m2">
+            <div class="pattern"></div>
+          </div>
+          <div class="club-body">
+            <div class="flex items-end gap-3 mb-3" style="margin-top: -32px;">
+              <div class="club-avatar lime">M2</div>
+              <div class="flex-1 min-w-0 pb-1">
+                <div class="club-name">Toyota Mark II</div>
+              </div>
+            </div>
+            <div class="club-desc">Легендарный кузов. Дрифт, тюнинг, общение владельцев 90-х.</div>
+            <div class="club-footer">
+              <div class="club-stats">
+                <span class="stat"><span class="live-dot-club"></span>42 онлайн</span>
+                <span class="stat">2 340 участников</span>
+              </div>
+              <button class="club-action joined" onclick="event.stopPropagation(); openClubDetail(1)">Открыть</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="club-card" onclick="openClubDetail(2)">
+          <div class="club-cover camry">
+            <div class="pattern"></div>
+          </div>
+          <div class="club-body">
+            <div class="flex items-end gap-3 mb-3" style="margin-top: -32px;">
+              <div class="club-avatar gold">C</div>
+              <div class="flex-1 min-w-0 pb-1">
+                <div class="club-name">Toyota Camry Club</div>
+              </div>
+            </div>
+            <div class="club-desc">Всё про Camry: от 30-го кузова до последних гибридов. Опыт, ремонт, советы.</div>
+            <div class="club-footer">
+              <div class="club-stats">
+                <span class="stat"><span class="live-dot-club"></span>128 онлайн</span>
+                <span class="stat">8 450 участников</span>
+              </div>
+              <button class="club-action joined" onclick="event.stopPropagation(); openClubDetail(2)">Открыть</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="club-card" onclick="openClubDetail(3)">
+          <div class="club-cover e36">
+            <div class="pattern"></div>
+          </div>
+          <div class="club-body">
+            <div class="flex items-end gap-3 mb-3" style="margin-top: -32px;">
+              <div class="club-avatar blue">E36</div>
+              <div class="flex-1 min-w-0 pb-1">
+                <div class="club-name">BMW E36 Клуб</div>
+              </div>
+            </div>
+            <div class="club-desc">Легенда 90-х. Дрифт, стенс, реставрация. Всё о культовом кузове.</div>
+            <div class="club-footer">
+              <div class="club-stats">
+                <span class="stat">1 890 участников</span>
+              </div>
+              <button class="club-action" onclick="event.stopPropagation(); joinClub(this)">Вступить</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="club-card" onclick="openClubDetail(4)">
+          <div class="club-cover gaz">
+            <div class="pattern"></div>
+          </div>
+          <div class="club-body">
+            <div class="flex items-end gap-3 mb-3" style="margin-top: -32px;">
+              <div class="club-avatar gray">ГАЗ</div>
+              <div class="flex-1 min-w-0 pb-1">
+                <div class="club-name">ГАЗ 21 Волга <span class="private-badge"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Приватный</span></div>
+              </div>
+            </div>
+            <div class="club-desc">Клуб любителей ретро-автомобилей. Только для владельцев и реставраторов.</div>
+            <div class="club-footer">
+              <div class="club-stats"><span class="stat">320 участников</span></div>
+              <button class="club-action" onclick="event.stopPropagation(); alert('Заявка отправлена')">Подать заявку</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center pt-6 pb-4 text-[11px] text-ink-3">Показано 4 из 248 клубов</div>
+    </main>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 16: КЛУБ ВНУТРИ ================= -->
+<div id="screen-club-detail" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-40 screen-bg">
+    <div class="club-cover-detail">
+      <div class="pattern"></div>
+      <div class="absolute top-0 left-0 right-0 px-5 pt-6 pb-4 flex items-center justify-between z-10">
+        <button onclick="goTo('clubs')" class="header-btn-glass">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <div class="flex gap-2">
+          <button onclick="alert('Поиск в клубе')" class="header-btn-glass">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
+          <button onclick="alert('Ещё')" class="header-btn-glass">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="px-5 page" style="margin-top: -40px; position: relative; z-index: 2;">
+      <div class="stagger">
+        <div class="flex items-end gap-4 mb-4">
+          <div class="club-avatar-lg">M2</div>
+          <div class="flex-1 min-w-0 pb-1">
+            <h1 class="club-title">Toyota Mark II</h1>
+            <div class="online-badge"><span class="dot"></span>42 онлайн</div>
+          </div>
+        </div>
+
+        <div class="text-[13px] leading-relaxed mb-4 text-ink-2">
+          Легендарный кузов. Дрифт, тюнинг, общение владельцев 90-х. Здесь помогают, а не осуждают.
+        </div>
+
+        <div class="flex items-center gap-4 mb-5 text-[12px] text-ink-2">
+          <span>2 340 участников</span>
+          <span>18 новых сегодня</span>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchClubTab(0, this)">Лента</button>
+        <button class="tab" onclick="switchClubTab(1, this)">Участники</button>
+        <button class="tab" onclick="switchClubTab(2, this)">Гаражи</button>
+        <button class="tab" onclick="switchClubTab(3, this)">Барахолка</button>
+        <button class="tab" onclick="switchClubTab(4, this)">Встречи</button>
+      </div>
+
+      <div id="clubTab0" class="stagger">
+        <div class="post">
+          <div class="post-head">
+            <div class="post-avatar a1">Д</div>
+            <div class="flex-1 min-w-0">
+              <div class="post-name">Дмитрий <span class="badge-role">Модератор</span></div>
+              <div class="post-time">2 часа назад</div>
+            </div>
+          </div>
+          <div class="post-text">Поставил новые диски Work Emotion CR Kai. Размер 17x9, резина 225/45. Пришлось немного раскатать арки, но результат того стоит.</div>
+          <div class="post-photos"><div class="post-photo"></div><div class="post-photo"></div></div>
+          <div class="post-actions">
+            <button class="action liked"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>24</button>
+            <button class="action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>12</button>
+          </div>
+        </div>
+
+        <div class="post">
+          <div class="post-head">
+            <div class="post-avatar a2">А</div>
+            <div class="flex-1 min-w-0">
+              <div class="post-name">Алексей</div>
+              <div class="post-time">5 часов назад</div>
+            </div>
+          </div>
+          <div class="post-text">Ребят, кто-нибудь ставил ксенон в 90-й? Подскажите, какие лампы лучше и не будет ли проблем с ГИБДД.</div>
+          <div class="post-actions">
+            <button class="action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>8</button>
+            <button class="action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>14</button>
+          </div>
+        </div>
+
+        <div class="post">
+          <div class="post-head">
+            <div class="post-avatar a3">И</div>
+            <div class="flex-1 min-w-0">
+              <div class="post-name">Иван Смирнов <span class="badge-role mod">Сервис</span></div>
+              <div class="post-time">вчера</div>
+            </div>
+          </div>
+          <div class="post-text">Делал диагностику на Mark II с 1JZ-GTE. Частая проблема — датчик детонации. Если горит чек и троит на холодную — сразу сюда.</div>
+          <div class="post-actions">
+            <button class="action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>47</button>
+            <button class="action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>28</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="clubTab1" class="hidden text-center py-12 text-ink-3">
+        <div class="text-[14px] mb-1">2 340 участников</div>
+        <div class="text-[12px]">Полный список — в разработке</div>
+      </div>
+      <div id="clubTab2" class="hidden text-center py-12 text-ink-3">
+        <div class="text-[14px] mb-1">248 гаражей</div>
+        <div class="text-[12px]">В разработке</div>
+      </div>
+      <div id="clubTab3" class="hidden text-center py-12 text-ink-3">
+        <div class="text-[14px] mb-1">32 объявления</div>
+        <div class="text-[12px]">В разработке</div>
+      </div>
+      <div id="clubTab4" class="hidden text-center py-12 text-ink-3">
+        <div class="text-[14px] mb-1">3 встречи</div>
+        <div class="text-[12px]">В разработке</div>
+      </div>
+    </main>
+
+    <div class="compose-bar" onclick="alert('Написать пост')">
+      <div class="compose-avatar">И</div>
+      <div class="compose-text">Написать в клубе...</div>
+      <div class="compose-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 17: ПОМОЩЬ ================= -->
+<div id="screen-help" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center gap-3">
+        <button class="btn-back" onclick="goTo('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <h1 class="font-medium tracking-tight text-[15px]">Помощь</h1>
+      </div>
+    </header>
+
+    <main class="px-5 page">
+      <div class="pt-6 pb-5">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-medium mb-3 text-ink-3">Помощь на дороге</div>
+        <div class="display">Помощь</div>
+      </div>
+
+      <div class="card card-accent-lime p-5 mb-5">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 card-accent-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+          </div>
+          <div class="flex-1">
+            <div class="text-[14px] font-semibold mb-1">Мне нужна помощь</div>
+            <div class="text-[12px] text-ink-2 leading-relaxed">Сломался? Отправь запрос — свои рядом помогут.</div>
+          </div>
+        </div>
+        <button onclick="openHelpRequest()" class="btn-primary">Позвать на помощь</button>
+      </div>
+
+      <div class="pt-5 mb-4 section-top-border">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-[13px] font-semibold tracking-tight">Кому нужна помощь</h2>
+        </div>
+
+        <div class="flex gap-2 mb-4">
+          <button class="filter-chip active" data-filter="nearby" onclick="selectHelpFilter(this)">Рядом</button>
+          <button class="filter-chip" data-filter="clubs" onclick="selectHelpFilter(this)">Мои клубы</button>
+          <button class="filter-chip" data-filter="all" onclick="selectHelpFilter(this)">Все</button>
+        </div>
+
+        <div class="space-y-3" id="helpRequestsList"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ================= ЭКРАН 18: ПРОФИЛЬ ================= -->
+<div id="screen-profile" class="screen">
+  <div class="max-w-md mx-auto min-h-screen relative pb-32 screen-bg">
+    <header class="sticky-header">
+      <div class="px-5 py-4 flex items-center justify-between">
+        <h1 class="font-medium tracking-tight text-[15px]">Профиль</h1>
+      </div>
+    </header>
+
+    <main>
+      <div class="pt-6 pb-6 px-5 text-center relative">
+        <div class="avatar-lg empty" id="profileAvatar">?</div>
+        <div class="font-semibold tracking-tight mb-1 profile-name" id="profileName">Без имени</div>
+        <div class="text-[12.5px] mb-6 text-ink-2" id="profilePhone">—</div>
+
+        <div class="stats">
+          <div>
+            <div class="stat-value">0</div>
+            <div class="stat-label">Помощь</div>
+          </div>
+          <div>
+            <div class="stat-value">0</div>
+            <div class="stat-label">Клуба</div>
+          </div>
+          <div>
+            <div class="stat-value">1</div>
+            <div class="stat-label">День</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5 pb-6">
+        <div class="pt-5 mb-4 section-top-border">
+          <div class="text-[13px] font-semibold mb-3">Моя машина</div>
+
+          <div class="card p-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 car-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 17h14M5 17a2 2 0 1 1-4 0v-3.28a1 1 0 0 1 .684-.948l4.42-1.473a1 1 0 0 0 .463-.346l3.166-3.955a1 1 0 0 1 .78-.376h5.214a1 1 0 0 1 .78.376l3.166 3.955a1 1 0 0 0 .463.346l4.42 1.473A1 1 0 0 1 23 13.72V17a2 2 0 1 1-4 0M9 17a2 2 0 1 1-4 0M7 17h6"/>
+                  <circle cx="7" cy="17" r="2"/>
+                  <circle cx="17" cy="17" r="2"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-[15px] font-semibold" id="profileCarName">Машина не добавлена</div>
+                <div class="text-[11.5px] mt-0.5 text-ink-2" id="profileCarMeta">Добавь данные, чтобы вести историю</div>
+              </div>
+            </div>
+
+            <div id="profilePlateWrap" class="plate-preview-center" style="display:none;">
+              <svg class="plate-svg" viewBox="0 0 580 120" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="580" height="120" rx="10" fill="#FFFFFF"/>
+                <rect x="0" y="0" width="580" height="120" rx="10" fill="none" stroke="#000000" stroke-width="6"/>
+                <rect x="6" y="6" width="568" height="108" rx="5" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+                <line x1="436" y1="3" x2="436" y2="117" stroke="#000000" stroke-width="4"/>
+                <text id="pL1" x="62" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">А</text>
+                <text id="pD1" x="125" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">0</text>
+                <text id="pD2" x="188" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">0</text>
+                <text id="pD3" x="251" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">0</text>
+                <text id="pL2" x="318" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">А</text>
+                <text id="pL3" x="380" y="86" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="96" fill="#000000" text-anchor="middle">А</text>
+                <text id="pRegion" x="508" y="48" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="40" fill="#000000" text-anchor="middle">000</text>
+                <text x="508" y="76" font-family="'Roboto Condensed', 'Arial Narrow', sans-serif" font-weight="700" font-size="18" fill="#000000" text-anchor="middle">RUS</text>
+                <rect x="492" y="84" width="32" height="21" fill="#FFFFFF" stroke="#000000" stroke-width="1"/>
+                <rect x="492" y="84" width="32" height="7" fill="#FFFFFF"/>
+                <rect x="492" y="91" width="32" height="7" fill="#0039A6"/>
+                <rect x="492" y="98" width="32" height="7" fill="#D52B1E"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-5 section-top-border">
+          <div class="text-[13px] font-semibold mb-2">Дополнительно</div>
+
+          <div class="menu-row" onclick="goTo('documents')">
+            <div class="menu-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            </div>
+            <div class="menu-label">Документы</div>
+            <div class="menu-value">6</div>
+            <svg class="menu-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+
+          <div class="menu-row" onclick="goTo('reminders')">
+            <div class="menu-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            </div>
+            <div class="menu-label">Напоминания</div>
+            <div class="menu-value">4</div>
+            <svg class="menu-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+
+          <div class="menu-row" onclick="goTo('analytics')">
+            <div class="menu-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 16v-5"/><path d="M12 16V8"/><path d="M17 16v-9"/></svg>
+            </div>
+            <div class="menu-label">Аналитика</div>
+            <svg class="menu-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="pt-5 section-top-border">
+          <div class="text-[13px] font-semibold mb-2">Настройки</div>
+
+          <div class="menu-row" onclick="alert('Уведомления')">
+            <div class="menu-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            </div>
+            <div class="menu-label">Уведомления</div>
+            <div class="menu-value">Включены</div>
+            <svg class="menu-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+
+          <div class="menu-row" onclick="if(confirm('Сбросить все данные?')){localStorage.clear();location.reload();}">
+            <div class="menu-icon red">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+            </div>
+            <div class="menu-label menu-label-danger">Сбросить данные</div>
+            <svg class="menu-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="text-center pt-8 pb-4 text-[10px] tracking-widest uppercase version-text">Авто-ОС · V1.0</div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ================= НИЖНЕЕ МЕНЮ ================= -->
+<nav id="bottomNav">
+  <div class="grid grid-cols-5">
+    <button class="nav-btn" data-nav="home" onclick="goTo('home')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2h-5v-7h-4v7H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Главная</span>
+    </button>
+    <button class="nav-btn" data-nav="expenses" onclick="goTo('expenses')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16v-5"/><path d="M12 16V8"/><path d="M17 16v-9"/></svg>
+      <span>Расходы</span>
+    </button>
+    <button onclick="openExpense()" class="nav-plus mx-auto">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+    </button>
+    <button class="nav-btn" data-nav="maintenance" onclick="goTo('maintenance')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      <span>Обслуживание</span>
+    </button>
+    <button class="nav-btn" data-nav="profile" onclick="goTo('profile')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Профиль</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ================= МОДАЛКА: РАСХОД ================= -->
+<div id="expenseModal" class="modal-backdrop" onclick="if(event.target===this)closeExpense()">
+  <div class="sheet">
+    <div class="grabber"></div>
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-[18px] font-semibold tracking-tight sheet-title">Новый расход</h2>
+      <button onclick="closeExpense()" class="btn-close-modal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <label class="field-label">Сумма, ₽</label>
+    <input id="expenseAmount" type="text" inputmode="numeric" placeholder="0" class="amount-field mb-5" autocomplete="off">
+    <label class="field-label">Описание</label>
+    <input id="expenseDesc" type="text" placeholder="АЗС, сервис" class="input-field mb-6" autocomplete="off">
+    <button id="saveExpenseBtn" class="btn-primary" disabled onclick="saveExpense()">Сохранить</button>
+  </div>
+</div>
+
+<!-- ================= МОДАЛКА: ЗАМЕНА ================= -->
+<div id="resetModal" class="modal-backdrop" onclick="if(event.target===this)closeReset()">
+  <div class="sheet">
+    <div class="grabber"></div>
+    <div class="mb-2 text-[10px] uppercase tracking-[0.2em] font-medium text-lime">Отметить замену</div>
+    <h2 class="text-[18px] font-semibold tracking-tight mb-6 sheet-title" id="resetTitle">Моторное масло</h2>
+    <label class="field-label">Пробег на момент замены</label>
+    <input id="resetMileage" type="text" inputmode="numeric" placeholder="84 320" class="input-field mb-5" autocomplete="off">
+    <label class="field-label">Дата замены</label>
+    <input id="resetDate" type="date" class="input-field mb-6 date-field">
+    <div class="checkbox-row" onclick="toggleNeedsChange()">
+      <div class="checkbox-box" id="needsChangeBox">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div class="flex-1">
+        <div class="text-[13px] font-medium">Нужно поменять</div>
+        <div class="text-[11px] text-ink-3 mt-0.5">Отметить как «пора менять»</div>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-6">
+      <button class="btn-ghost flex-1" onclick="closeReset()">Отмена</button>
+      <button class="btn-primary" style="flex:1;" onclick="confirmReset()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= МОДАЛКА: ДОБАВИТЬ ЗАПЧАСТЬ ================= -->
+<div id="addPartModal" class="modal-backdrop" onclick="if(event.target===this)closeAddPart()">
+  <div class="sheet">
+    <div class="grabber"></div>
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-[18px] font-semibold tracking-tight sheet-title">Найти запчасть</h2>
+      <button onclick="closeAddPart()" class="btn-close-modal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="search-box mb-4">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input id="partSearchInput" type="text" placeholder="Введи название: масло, колодки..." autocomplete="off">
+    </div>
+    <div class="mb-3 flex flex-wrap gap-2" id="partCategories">
+      <button class="filter-chip active" data-cat="all" onclick="selectPartCategory(this)">Все</button>
+      <button class="filter-chip" data-cat="engine" onclick="selectPartCategory(this)">Двигатель</button>
+      <button class="filter-chip" data-cat="brakes" onclick="selectPartCategory(this)">Тормоза</button>
+      <button class="filter-chip" data-cat="filters" onclick="selectPartCategory(this)">Фильтры</button>
+      <button class="filter-chip" data-cat="fluids" onclick="selectPartCategory(this)">Жидкости</button>
+      <button class="filter-chip" data-cat="electric" onclick="selectPartCategory(this)">Электрика</button>
+      <button class="filter-chip" data-cat="suspension" onclick="selectPartCategory(this)">Подвеска</button>
+    </div>
+    <div class="parts-search-list" id="partsSearchList"></div>
+  </div>
+</div>
+
+<!-- ================= МОДАЛКА: ЗАПРОС ПОМОЩИ ================= -->
+<div id="helpModal" class="modal-backdrop" onclick="if(event.target===this)closeHelpRequest()">
+  <div class="sheet">
+    <div class="grabber"></div>
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-[18px] font-semibold tracking-tight sheet-title">Позвать на помощь</h2>
+      <button onclick="closeHelpRequest()" class="btn-close-modal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <label class="field-label">Что случилось?</label>
+    <div class="grid grid-cols-2 gap-2 mb-5" id="helpReasonGrid">
+      <button class="reason-btn active" data-reason="Не заводится" onclick="selectReason(this)">Не заводится</button>
+      <button class="reason-btn" data-reason="Пробил колесо" onclick="selectReason(this)">Пробил колесо</button>
+      <button class="reason-btn" data-reason="Кончился бензин" onclick="selectReason(this)">Кончился бензин</button>
+      <button class="reason-btn" data-reason="ДТП" onclick="selectReason(this)">ДТП</button>
+      <button class="reason-btn" data-reason="Заблокировался" onclick="selectReason(this)">Заблокировался</button>
+      <button class="reason-btn" data-reason="Другое" onclick="selectReason(this)">Другое</button>
+    </div>
+    <label class="field-label">Коротко о проблеме <span class="label-optional">(необязательно)</span></label>
+    <input id="helpComment" type="text" placeholder="Например: на Ленинградке, прямо" class="input-field mb-5" autocomplete="off">
+    <div class="checkbox-row" onclick="toggleLocation()">
+      <div class="checkbox-box checked" id="locationBox">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div class="flex-1">
+        <div class="text-[13px] font-medium">Отправить геолокацию</div>
+        <div class="text-[11px] text-ink-3 mt-0.5">Чтобы тебя быстрее нашли</div>
+      </div>
+    </div>
+    <button class="btn-primary mt-6" onclick="sendHelpRequest()">Отправить запрос</button>
+  </div>
+</div>
+
+<!-- ================= МОДАЛКА: ОТКЛИК ================= -->
+<div id="respondModal" class="modal-backdrop" onclick="if(event.target===this)closeRespond()">
+  <div class="sheet">
+    <div class="grabber"></div>
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-[18px] font-semibold tracking-tight sheet-title">Помочь?</h2>
+      <button onclick="closeRespond()" class="btn-close-modal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div id="respondInfo" class="card p-4 mb-5"></div>
+    <label class="field-label">Сообщение <span class="label-optional">(необязательно)</span></label>
+    <input id="respondMessage" type="text" placeholder="Например: еду, буду через 10 минут" class="input-field mb-6" autocomplete="off">
+    <div class="flex gap-2">
+      <button class="btn-ghost flex-1" onclick="closeRespond()">Отмена</button>
+      <button class="btn-primary" style="flex:1;" onclick="confirmRespond()">Откликнуться</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
