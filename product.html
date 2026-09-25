@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone 18 Pro Max Burgundy — iSakha</title>
+
+<!-- SEO -->
+<meta name="description" content="iPhone 18 Pro Max в Якутске. Burgundy, Titanium, 2026. В наличии, гарантия 1 год, доставка по городу. От 149 990 ₽.">
+<meta name="keywords" content="iphone 18 pro max, айфон якутск, купить iphone, isakha">
+<meta name="author" content="iSakha">
+
+<!-- Open Graph -->
+<meta property="og:type" content="product">
+<meta property="og:title" content="iPhone 18 Pro Max — iSakha">
+<meta property="og:description" content="Burgundy · Titanium · 2026. В наличии в Якутске. От 149 990 ₽.">
+<meta property="og:image" content="https://isakha.ru/preview.jpg">
+<meta property="og:url" content="https://isakha.ru">
+<meta property="og:site_name" content="iSakha">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="iPhone 18 Pro Max — iSakha">
+<meta name="twitter:description" content="Burgundy · Titanium · 2026. В наличии в Якутске.">
+<meta name="twitter:image" content="https://isakha.ru/preview.jpg">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'%3E%3Cpath fill='%236b2530' d='M17.05 15.6c-.03-3.2 2.6-4.73 2.72-4.8-1.48-2.17-3.79-2.47-4.6-2.5-1.96-.2-3.82 1.15-4.82 1.15-1 0-2.53-1.12-4.16-1.09-2.14.03-4.11 1.25-5.21 3.16-2.22 3.85-.57 9.55 1.6 12.68 1.06 1.53 2.32 3.25 3.97 3.19 1.6-.07 2.2-1.03 4.13-1.03 1.93 0 2.47 1.03 4.16.99 1.72-.03 2.8-1.56 3.85-3.1 1.21-1.78 1.71-3.5 1.74-3.59-.04-.02-3.34-1.28-3.38-5.06zM14.03 6.4c.88-1.07 1.47-2.55 1.31-4.03-1.27.05-2.8.84-3.71 1.91-.81.94-1.53 2.45-1.34 3.9 1.42.11 2.86-.72 3.74-1.78z'/%3E%3C/svg%3E">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: #08080a;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+  }
+
+  /* ===== КНОПКА НАЗАД ===== */
+  .back-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(20,20,24,0.7);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: all 0.15s;
+    font-family: inherit;
+    text-decoration: none;
+  }
+
+  .back-btn:hover {
+    background: rgba(30,30,36,0.9);
+    color: #fff;
+    border-color: rgba(255,255,255,0.2);
+    transform: translateX(-2px);
+  }
+
+  .back-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* ===== КНОПКА КОРЗИНЫ ===== */
+  .cart-btn {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(20,20,24,0.7);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: all 0.15s;
+    font-family: inherit;
+    text-decoration: none;
+  }
+
+  .cart-btn:hover {
+    background: rgba(30,30,36,0.9);
+    color: #fff;
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .cart-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  .cart-btn .count {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background: #4ade80;
+    color: #0a0a0c;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-btn .count.hidden { display: none; }
+
+  /* Пульс корзины при добавлении */
+  @keyframes cartPulse {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.25); box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
+    60%  { transform: scale(1.1); box-shadow: 0 0 0 14px rgba(74,222,128,0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+  }
+
+  .cart-btn.pulse {
+    animation: cartPulse 0.7s ease-out;
+  }
+
+  /* Счётчик пульс */
+  @keyframes countPop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+
+  .cart-btn .count.pop {
+    animation: countPop 0.4s ease-out;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    max-width: 1180px;
+    width: 100%;
+    background: #101014;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow:
+      0 40px 100px rgba(0,0,0,0.7),
+      0 0 0 1px rgba(255,255,255,0.05);
+  }
+
+  /* ===== ЛЕВАЯ ЧАСТЬ — 3D ===== */
+  .viewer {
+    position: relative;
+    background: var(--viewer-bg,
+      radial-gradient(circle at 50% 35%, #2a1a24 0%, #10080c 45%, #08080a 100%));
+    min-height: 620px;
+    overflow: hidden;
+    transition: background 0.6s ease;
+  }
+
+  .viewer::after {
+    content: "";
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 40px;
+    background: radial-gradient(ellipse, var(--glow, rgba(180,60,80,0.35)) 0%, transparent 70%);
+    filter: blur(24px);
+    z-index: 0;
+    pointer-events: none;
+    transition: background 0.6s ease;
+  }
+
+  .iframe-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .iframe-wrap iframe {
+    width: 160%;
+    height: 160%;
+    border: none;
+    transform: scale(0.5);
+    transform-origin: center center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -85%;
+    margin-left: -80%;
+  }
+
+  .top-badge {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    z-index: 3;
+    display: flex;
+    gap: 8px;
+  }
+
+  .badge {
+    padding: 7px 14px;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    background: var(--badge-bg, rgba(107, 37, 48, 0.85));
+    color: var(--badge-color, #f5d5d8);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+
+  .badge.new {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+
+  /* ===== ПРАВАЯ ЧАСТЬ — ИНФО ===== */
+  .info {
+    padding: 44px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #101014;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .title {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    line-height: 1.15;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .colors-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .color-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.15s, border-color 0.15s;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+  }
+
+  .color-dot:hover { transform: scale(1.1); }
+  .color-dot.active { border-color: #fff; transform: scale(1.12); }
+
+  .color-dot.burgundy { background: linear-gradient(135deg, #6b2530, #2e0e15); }
+  .color-dot.silver   { background: linear-gradient(135deg, #e8e8ec, #a8a8b0); }
+  .color-dot.glacier  { background: linear-gradient(135deg, #7a9bc4, #3d5a80); }
+  .color-dot.black    { background: linear-gradient(135deg, #3a3a42, #0a0a0c); }
+
+  .options-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .option-btn {
+    flex: 1;
+    padding: 12px 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+    font-family: inherit;
+  }
+
+  .option-btn:hover {
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+  }
+
+  .option-btn.active {
+    background: var(--storage-bg-active, rgba(107, 37, 48, 0.4));
+    border-color: var(--storage-border-active, rgba(180, 80, 100, 0.6));
+    color: #fff;
+  }
+
+  .option-btn small {
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+  }
+
+  .price-block {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .price {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .old-price {
+    font-size: 16px;
+    color: rgba(255,255,255,0.35);
+    text-decoration: line-through;
+  }
+
+  .discount {
+    margin-left: auto;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+    border-radius: 8px;
+  }
+
+  .perks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
+  }
+
+  .perk {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .perk svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    stroke: #4ade80;
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+
+  .btn-cart {
+    padding: 17px;
+    background: var(--btn-grad, linear-gradient(135deg, #7a2a38, #4a1520));
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.5s ease;
+    box-shadow: 0 10px 30px var(--btn-shadow, rgba(107,37,48,0.4));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px var(--btn-shadow, rgba(107,37,48,0.55));
+  }
+
+  .btn-cart:active { transform: translateY(0); }
+
+  .btn-cart svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* ===== АНИМАЦИЯ ПОКУПКИ ===== */
+  @keyframes buyRipple {
+    0% {
+      transform: scale(0);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+
+  .buy-ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+    animation: buyRipple 0.7s ease-out forwards;
+  }
+
+  /* Галочка поверх кнопки */
+  .btn-cart .check-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .btn-cart .check-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: #fff;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .btn-cart .check-icon.show {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Текст кнопки плавно исчезает и появляется */
+  .btn-cart .btn-text {
+    transition: opacity 0.2s;
+  }
+
+  .btn-cart .btn-text.hide {
+    opacity: 0;
+  }
+
+  /* Общая тряска кнопки */
+  @keyframes btnPop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(0.96); }
+    100% { transform: scale(1); }
+  }
+
+  .btn-cart.pop {
+    animation: btnPop 0.25s ease-out;
+  }
+
+  .btn-secondary {
+    padding: 14px;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.04);
+    color: #fff;
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  /* ===== АДАПТИВ ===== */
+  @media (max-width: 860px) {
+    .card { grid-template-columns: 1fr; }
+    .viewer { min-height: 420px; }
+    .info { padding: 32px 24px; gap: 18px; }
+    .title { font-size: 24px; }
+    .price { font-size: 30px; }
+    .back-btn, .cart-btn {
+      top: 16px;
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+    .back-btn { left: 16px; }
+    .cart-btn { right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Кнопка назад -->
+  <a href="catalog.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Назад в каталог
+  </a>
+
+  <!-- Кнопка корзины -->
+  <a href="cart.html" class="cart-btn" id="cartBtn">
+    <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+    Корзина
+    <span class="count hidden" id="cartCount">0</span>
+  </a>
+
+  <!-- Карточка -->
+  <div class="card">
+    <div class="viewer" id="viewer">
+      <div class="iframe-wrap" id="iframeWrap"></div>
+
+      <div class="top-badge">
+        <div class="badge" id="colorBadge">Burgundy</div>
+        <div class="badge new">Новинка 2026</div>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="header">
+        <h1 class="title">iPhone 18 Pro Max</h1>
+        <p class="subtitle">Titanium · 2026 · 6.9" OLED</p>
+      </div>
+
+      <div>
+        <div class="section-label">Цвет — <span id="colorName">Burgundy</span></div>
+        <div class="colors-row">
+          <div class="color-dot burgundy active" data-color="burgundy" data-colorname="Burgundy"></div>
+          <div class="color-dot silver"   data-color="silver"   data-colorname="Silver"></div>
+          <div class="color-dot glacier"  data-color="glacier"  data-colorname="Glacier Blue"></div>
+          <div class="color-dot black"    data-color="black"    data-colorname="Black"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">SIM</div>
+        <div class="options-row" id="simRow">
+          <div class="option-btn active" data-sim="1 SIM + eSIM">1 SIM + eSIM</div>
+          <div class="option-btn" data-sim="Только eSIM">Только eSIM</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Память</div>
+        <div class="options-row" id="storageRow">
+          <div class="option-btn active" data-storage="256 ГБ" data-price="149990">256 ГБ <small>149 990 ₽</small></div>
+          <div class="option-btn" data-storage="512 ГБ" data-price="169990">512 ГБ <small>169 990 ₽</small></div>
+          <div class="option-btn" data-storage="1 ТБ" data-price="199990">1 ТБ <small>199 990 ₽</small></div>
+        </div>
+      </div>
+
+      <div class="price-block">
+        <div class="price" id="priceDisplay">149 990 ₽</div>
+        <div class="old-price" id="oldPriceDisplay">169 990 ₽</div>
+        <div class="discount" id="discountDisplay">−12%</div>
+      </div>
+
+      <div class="perks">
+        <div class="perk">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          В наличии в Якутске
+        </div>
+        <div class="perk">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          Гарантия 1 год
+        </div>
+        <div class="perk">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          Доставка по городу
+        </div>
+        <div class="perk">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          Trade-in
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-cart" id="btnCart">
+          <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <span class="btn-text" id="btnCartText">Добавить в корзину</span>
+          <span class="check-icon" id="checkIcon">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          </span>
+        </button>
+        <button class="btn-secondary">Позвонить · +7 (999) 123-45-67</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const models = {
+    burgundy: {
+      name: 'Burgundy',
+      src: 'https://sketchfab.com/models/604acc18b5d5455d820a16359b45b003/embed?autospin=1&autostart=1&transparent=1',
+      viewerBg: 'radial-gradient(circle at 50% 35%, #2a1a24 0%, #10080c 45%, #08080a 100%)',
+      glow: 'rgba(180,60,80,0.35)',
+      badgeBg: 'rgba(107, 37, 48, 0.85)',
+      badgeColor: '#f5d5d8',
+      btnGrad: 'linear-gradient(135deg, #7a2a38, #4a1520)',
+      btnShadow: 'rgba(107,37,48,0.45)',
+      storageBgActive: 'rgba(107, 37, 48, 0.5)',
+      storageBorderActive: 'rgba(180, 80, 100, 0.7)',
+      thumbColor: '#2a1a24'
+    },
+    silver: {
+      name: 'Silver',
+      src: 'https://sketchfab.com/models/d383a366cc9e464ba4b24e5ddb996866/embed?autospin=1&autostart=1&transparent=1',
+      viewerBg: 'radial-gradient(circle at 50% 35%, #2a2a30 0%, #14141a 45%, #08080a 100%)',
+      glow: 'rgba(200,200,220,0.25)',
+      badgeBg: 'rgba(180, 180, 190, 0.85)',
+      badgeColor: '#1a1a20',
+      btnGrad: 'linear-gradient(135deg, #6a6a72, #3a3a42)',
+      btnShadow: 'rgba(120,120,130,0.4)',
+      storageBgActive: 'rgba(160, 160, 170, 0.35)',
+      storageBorderActive: 'rgba(200, 200, 210, 0.6)',
+      thumbColor: '#2a2a30'
+    },
+    glacier: {
+      name: 'Glacier Blue',
+      src: 'https://sketchfab.com/models/86dc4a625ae2444c97cf8469a6f6f016/embed?autospin=1&autostart=1&transparent=1',
+      viewerBg: 'radial-gradient(circle at 50% 35%, #1a2a3c 0%, #0c141e 45%, #08080a 100%)',
+      glow: 'rgba(100,150,220,0.35)',
+      badgeBg: 'rgba(80, 120, 180, 0.85)',
+      badgeColor: '#e0ecf8',
+      btnGrad: 'linear-gradient(135deg, #4a6a9a, #2a3f5a)',
+      btnShadow: 'rgba(60,100,160,0.45)',
+      storageBgActive: 'rgba(80, 120, 180, 0.4)',
+      storageBorderActive: 'rgba(120, 170, 230, 0.65)',
+      thumbColor: '#1a2a3c'
+    },
+    black: {
+      name: 'Black',
+      src: 'https://sketchfab.com/models/8fd804a9b0ea49249de3f1e0450fbc9c/embed?autospin=1&autostart=1&transparent=1',
+      viewerBg: 'radial-gradient(circle at 50% 35%, #1e1e24 0%, #0c0c10 45%, #08080a 100%)',
+      glow: 'rgba(80,80,100,0.3)',
+      badgeBg: 'rgba(40, 40, 48, 0.9)',
+      badgeColor: '#d8d8dc',
+      btnGrad: 'linear-gradient(135deg, #3a3a42, #1a1a20)',
+      btnShadow: 'rgba(40,40,50,0.5)',
+      storageBgActive: 'rgba(60, 60, 72, 0.5)',
+      storageBorderActive: 'rgba(110, 110, 130, 0.65)',
+      thumbColor: '#1e1e24'
+    }
+  };
+
+  const iframeWrap = document.getElementById('iframeWrap');
+  const viewer = document.getElementById('viewer');
+  const colorBadge = document.getElementById('colorBadge');
+  const colorName = document.getElementById('colorName');
+  const priceDisplay = document.getElementById('priceDisplay');
+  const oldPriceDisplay = document.getElementById('oldPriceDisplay');
+  const discountDisplay = document.getElementById('discountDisplay');
+  const cartCount = document.getElementById('cartCount');
+  const cartBtn = document.getElementById('cartBtn');
+
+  let current = {
+    color: 'burgundy',
+    colorName: 'Burgundy',
+    sim: '1 SIM + eSIM',
+    storage: '256 ГБ',
+    price: 149990
+  };
+
+  function formatPrice(n) {
+    return n.toLocaleString('ru-RU') + ' ₽';
+  }
+
+  function updatePrice(price) {
+    const oldPrice = Math.round(price * 1.13);
+    const discount = Math.round((1 - price / oldPrice) * 100);
+    priceDisplay.textContent = formatPrice(price);
+    oldPriceDisplay.textContent = formatPrice(oldPrice);
+    discountDisplay.textContent = '−' + discount + '%';
+  }
+
+  function setModel(colorKey) {
+    const m = models[colorKey];
+    if (!m) return;
+
+    iframeWrap.innerHTML = `
+      <div class="sketchfab-embed-wrapper">
+        <iframe
+          title="Apple iPhone 18 Pro Max ${m.name} 2026"
+          frameborder="0"
+          allowfullscreen
+          mozallowfullscreen="true"
+          webkitallowfullscreen="true"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          xr-spatial-tracking
+          execution-while-out-of-viewport
+          execution-while-not-rendered
+          web-share
+          src="${m.src}">
+        </iframe>
+      </div>`;
+
+    const iframe = iframeWrap.querySelector('iframe');
+    iframe.style.cssText = `
+      width: 160%;
+      height: 160%;
+      border: none;
+      transform: scale(0.5);
+      transform-origin: center center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -85%;
+      margin-left: -80%;
+    `;
+
+    viewer.style.setProperty('--viewer-bg', m.viewerBg);
+    viewer.style.setProperty('--glow', m.glow);
+    colorBadge.style.setProperty('--badge-bg', m.badgeBg);
+    colorBadge.style.setProperty('--badge-color', m.badgeColor);
+    colorBadge.textContent = m.name;
+    colorName.textContent = m.name;
+
+    document.documentElement.style.setProperty('--btn-grad', m.btnGrad);
+    document.documentElement.style.setProperty('--btn-shadow', m.btnShadow);
+    document.documentElement.style.setProperty('--storage-bg-active', m.storageBgActive);
+    document.documentElement.style.setProperty('--storage-border-active', m.storageBorderActive);
+  }
+
+  // ===== ЗВУК ПОКУПКИ (как на iPhone) =====
+  function playBuySound() {
+  try {
+    const audio = new Audio('apple-pay.mp3');
+    audio.volume = 0.6;
+    audio.play().catch(() => {});
+  } catch (e) {}
+}
+
+  // Цвет
+  document.querySelectorAll('.color-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+      current.color = dot.dataset.color;
+      current.colorName = dot.dataset.colorname;
+      setModel(dot.dataset.color);
+    });
+  });
+
+  // SIM
+  document.querySelectorAll('#simRow .option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#simRow .option-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      current.sim = btn.dataset.sim;
+    });
+  });
+
+  // Память
+  document.querySelectorAll('#storageRow .option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#storageRow .option-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      current.storage = btn.dataset.storage;
+      current.price = parseInt(btn.dataset.price, 10);
+      updatePrice(current.price);
+    });
+  });
+
+  // ===== КОРЗИНА =====
+  const btnCart = document.getElementById('btnCart');
+  const btnCartText = document.getElementById('btnCartText');
+  const checkIcon = document.getElementById('checkIcon');
+
+  function getCart() {
+    try {
+      return JSON.parse(localStorage.getItem('isakha_cart') || '[]');
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem('isakha_cart', JSON.stringify(cart));
+  }
+
+  function updateCartCount() {
+    const cart = getCart();
+    if (cart.length > 0) {
+      cartCount.textContent = cart.length;
+      cartCount.classList.remove('hidden');
+    } else {
+      cartCount.classList.add('hidden');
+    }
+  }
+
+  btnCart.addEventListener('click', () => {
+    const cart = getCart();
+    cart.push({
+      id: 'iphone-18-pro-max-' + current.color + '-' + current.storage.replace(/\s/g, ''),
+      name: 'iPhone 18 Pro Max',
+      color: current.color,
+      colorName: current.colorName,
+      sim: current.sim,
+      storage: current.storage,
+      price: current.price,
+      thumbColor: models[current.color].thumbColor
+    });
+    saveCart(cart);
+
+    // ===== ЗВУК =====
+    playBuySound();
+
+    // ===== АНИМАЦИЯ КНОПКИ =====
+    // Ripple
+    const ripple = document.createElement('div');
+    ripple.className = 'buy-ripple';
+    btnCart.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
+
+    // Pop кнопки
+    btnCart.classList.add('pop');
+    setTimeout(() => btnCart.classList.remove('pop'), 250);
+
+    // Скрыть текст, показать галочку
+    btnCartText.classList.add('hide');
+    checkIcon.classList.add('show');
+
+    // Вернуть обратно через 1.4 сек
+    setTimeout(() => {
+      checkIcon.classList.remove('show');
+      btnCartText.classList.remove('hide');
+    }, 1400);
+
+    // ===== АНИМАЦИЯ КОРЗИНЫ В УГЛУ =====
+    cartBtn.classList.add('pulse');
+    setTimeout(() => cartBtn.classList.remove('pulse'), 700);
+
+    // Обновить счётчик + pop
+    updateCartCount();
+    cartCount.classList.add('pop');
+    setTimeout(() => cartCount.classList.remove('pop'), 400);
+  });
+
+  // Старт
+  setModel('burgundy');
+  updateCartCount();
+</script>
+</body>
+</html>
