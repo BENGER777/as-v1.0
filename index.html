@@ -299,6 +299,7 @@
     border-color: rgba(255,255,255,0.25);
   }
 
+  /* ===== 3D ===== */
   .hero-3d {
     position: relative;
     z-index: 1;
@@ -318,6 +319,51 @@
     border: none;
     transform: scale(1.4);
     transform-origin: center center;
+  }
+
+  /* ===== МАСКА ПОВЕРХ 3D — СКРЫВАЕТ UI SKETCHFAB ===== */
+  .hero-3d-mask {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* Верхний левый угол — название модели и автор */
+  .hero-3d-mask::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 320px;
+    height: 100px;
+    background: radial-gradient(ellipse at 30% 30%,
+      #08080a 0%,
+      #08080a 45%,
+      rgba(8, 8, 10, 0.9) 65%,
+      rgba(8, 8, 10, 0.5) 80%,
+      transparent 100%);
+    pointer-events: none;
+    filter: blur(2px);
+  }
+
+  /* Правый нижний угол — логотип Sketchfab */
+  .hero-3d-mask::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 260px;
+    height: 90px;
+    background: radial-gradient(ellipse at 70% 70%,
+      #08080a 0%,
+      #08080a 45%,
+      rgba(8, 8, 10, 0.9) 65%,
+      rgba(8, 8, 10, 0.5) 80%,
+      transparent 100%);
+    pointer-events: none;
+    filter: blur(2px);
   }
 
   /* ===== БЕГУЩАЯ СТРОКА ===== */
@@ -475,7 +521,7 @@
     line-height: 1.6;
   }
 
-  /* ===== КАК МЫ РАБОТАЕМ — TIMELINE ===== */
+  /* ===== TIMELINE ===== */
   .timeline {
     position: relative;
     max-width: 900px;
@@ -688,7 +734,6 @@
     max-width: 620px;
   }
 
-  /* ===== КАРТОЧКИ-СТАТИСТИКА ===== */
   .about-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1040,6 +1085,7 @@
     </div>
 
     <div class="hero-3d" id="hero3d">
+      <div class="hero-3d-mask"></div>
       <iframe
         title="Apple iPhone 18 Pro Max Burgundy 2026"
         frameborder="0"
@@ -1345,7 +1391,7 @@
     particlesEl.appendChild(p);
   }
 
-  // ===== ПРОГРЕСС-БАР СКРОЛЛА =====
+  // ===== ПРОГРЕСС-БАР =====
   const scrollProgress = document.getElementById('scrollProgress');
   window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - window.innerHeight;
@@ -1353,7 +1399,7 @@
     scrollProgress.style.width = p + '%';
   });
 
-  // ===== ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ =====
+  // ===== АНИМАЦИЯ ПОЯВЛЕНИЯ =====
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -1369,7 +1415,7 @@
     observer.observe(el);
   });
 
-  // ===== TIMELINE ШАГИ + ЛИНИЯ =====
+  // ===== TIMELINE =====
   const tlSteps = document.querySelectorAll('.tl-step');
   const timelineFill = document.getElementById('timelineFill');
   const timeline = document.querySelector('.timeline');
